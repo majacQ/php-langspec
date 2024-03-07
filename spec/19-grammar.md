@@ -170,7 +170,7 @@ The grammar notation is described in [Grammars section](09-lexical-structure.md#
    <i><a href="#grammar-nowdoc-string-literal">nowdoc-string-literal</a></i>
 
 <i id="grammar-single-quoted-string-literal">single-quoted-string-literal::</i>
-   <i><a href="#grammar-b-prefix">b-prefix</a></i><sub>opt</sub>   '   <i><a href="#grammar-sq-char-sequence">sq-char-sequence</a></i><sub>opt</sub>   '
+   <i><a href="#grammar-b-prefix">b-prefix</a></i><sub>opt</sub>   &#039;   <i><a href="#grammar-sq-char-sequence">sq-char-sequence</a></i><sub>opt</sub>   &#039;
 
 <i id="grammar-sq-char-sequence">sq-char-sequence::</i>
    <i><a href="#grammar-sq-char">sq-char</a></i>
@@ -178,10 +178,10 @@ The grammar notation is described in [Grammars section](09-lexical-structure.md#
 
 <i id="grammar-sq-char">sq-char::</i>
    <i><a href="#grammar-sq-escape-sequence">sq-escape-sequence</a></i>
-   \<sub>opt</sub>   any member of the source character set except single-quote (') or backslash (\)
+   \<sub>opt</sub>   any member of the source character set except single-quote (&#039;) or backslash (\)
 
 <i id="grammar-sq-escape-sequence">sq-escape-sequence:: one of</i>
-   \'   \\
+   \&#039;   \\
 
 <i id="grammar-b-prefix">b-prefix:: one of</i>
    b   B
@@ -271,7 +271,7 @@ The grammar notation is described in [Grammars section](09-lexical-structure.md#
    \\   \$   \e   \f   \n   \r   \t   \v
 
 <i id="grammar-nowdoc-string-literal">nowdoc-string-literal::</i>
-   <i><a href="#grammar-b-prefix">b-prefix</a></i><sub>opt</sub>   &lt;&lt;&lt;   '   <i><a href="#grammar-name">name</a></i>   '   <i><a href="#grammar-new-line">new-line</a></i>   <i><a href="#grammar-hd-body">hd-body</a></i><sub>opt</sub>   <i><a href="#grammar-name">name</a></i>   ;<sub>opt</sub>   <i><a href="#grammar-new-line">new-line</a></i>
+   <i><a href="#grammar-b-prefix">b-prefix</a></i><sub>opt</sub>   &lt;&lt;&lt;   &#039;   <i><a href="#grammar-name">name</a></i>   &#039;   <i><a href="#grammar-new-line">new-line</a></i>   <i><a href="#grammar-hd-body">hd-body</a></i><sub>opt</sub>   <i><a href="#grammar-name">name</a></i>   ;<sub>opt</sub>   <i><a href="#grammar-new-line">new-line</a></i>
 
 <i id="grammar-operator-or-punctuator">operator-or-punctuator:: one of</i>
    [   ]   (   )   {   }   .   -&gt;   ++   --   **   *   +   -   ~   !
@@ -783,7 +783,7 @@ The grammar notation is described in [Grammars section](09-lexical-structure.md#
 
 <i id="grammar-switch-statement">switch-statement:</i>
    switch   (   <i><a href="#grammar-expression">expression</a></i>   )   {   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>   }
-   switch   (   <i><a href="#grammar-expression">expression</a></i>   )   :   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>   endswitch;
+   switch   (   <i><a href="#grammar-expression">expression</a></i>   )   :   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>   endswitch   ;
 
 <i id="grammar-case-statements">case-statements:</i>
    <i><a href="#grammar-case-statement">case-statement</a></i>   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>
@@ -964,11 +964,16 @@ The grammar notation is described in [Grammars section](09-lexical-structure.md#
 
 <pre>
 <i id="grammar-class-declaration">class-declaration:</i>
-   <i><a href="#grammar-class-modifier">class-modifier</a></i><sub>opt</sub>   class   <i><a href="#grammar-name">name</a></i>   <i><a href="#grammar-class-base-clause">class-base-clause</a></i><sub>opt</sub>   <i><a href="#grammar-class-interface-clause">class-interface-clause</a></i><sub>opt</sub>   {   <i><a href="#grammar-class-member-declarations">class-member-declarations</a></i><sub>opt</sub>   }
+   <i><a href="#grammar-class-modifiers">class-modifiers</a></i><sub>opt</sub>   class   <i><a href="#grammar-name">name</a></i>   <i><a href="#grammar-class-base-clause">class-base-clause</a></i><sub>opt</sub>   <i><a href="#grammar-class-interface-clause">class-interface-clause</a></i><sub>opt</sub>   {   <i><a href="#grammar-class-member-declarations">class-member-declarations</a></i><sub>opt</sub>   }
+
+<i id="grammar-class-modifiers">class-modifiers:</i>
+   <i><a href="#grammar-class-modifier">class-modifier</a></i>
+   <i><a href="#grammar-class-modifiers">class-modifiers</a></i>   <i><a href="#grammar-class-modifier">class-modifier</a></i>
 
 <i id="grammar-class-modifier">class-modifier:</i>
    abstract
    final
+   readonly
 
 <i id="grammar-class-base-clause">class-base-clause:</i>
    extends   <i><a href="#grammar-qualified-name">qualified-name</a></i>
@@ -1119,8 +1124,8 @@ The grammar notation is described in [Grammars section](09-lexical-structure.md#
 
 <pre>
 <i id="grammar-namespace-definition">namespace-definition:</i>
-   namespace   <i><a href="#grammar-name">name</a></i>   ;
-   namespace   <i><a href="#grammar-name">name</a></i><sub>opt</sub>   <i><a href="#grammar-compound-statement">compound-statement</a></i>
+   namespace   <i><a href="#grammar-namespace-name">namespace-name</a></i>   ;
+   namespace   <i><a href="#grammar-namespace-name">namespace-name</a></i><sub>opt</sub>   <i><a href="#grammar-compound-statement">compound-statement</a></i>
 
 <i id="grammar-namespace-use-declaration">namespace-use-declaration:</i>
    use   <i><a href="#grammar-namespace-function-or-const">namespace-function-or-const</a></i><sub>opt</sub>   <i><a href="#grammar-namespace-use-clauses">namespace-use-clauses</a></i>   ;

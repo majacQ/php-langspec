@@ -314,7 +314,7 @@ else  // this else does go with the outer if
 <!-- GRAMMAR
 switch-statement:
   'switch' '(' expression ')' '{' case-statements? '}'
-  'switch' '(' expression ')' ':' case-statements? 'endswitch;'
+  'switch' '(' expression ')' ':' case-statements? 'endswitch' ';'
 
 case-statements:
   case-statement case-statements?
@@ -334,7 +334,7 @@ case-default-label-terminator:
 <pre>
 <i id="grammar-switch-statement">switch-statement:</i>
    switch   (   <i><a href="10-expressions.md#grammar-expression">expression</a></i>   )   {   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>   }
-   switch   (   <i><a href="10-expressions.md#grammar-expression">expression</a></i>   )   :   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>   endswitch;
+   switch   (   <i><a href="10-expressions.md#grammar-expression">expression</a></i>   )   :   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>   endswitch   ;
 
 <i id="grammar-case-statements">case-statements:</i>
    <i><a href="#grammar-case-statement">case-statement</a></i>   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>
@@ -1337,7 +1337,7 @@ a [`__toString` method](14-classes.md#method-__tostring).
 
 After converting each of its *expression*s' values to strings, if
 necessary, `echo` concatenates them in order given, and writes the
-resulting string to [`STDOUT`](06-constants.md#core-predefined-constants). Unlike [`print`](10-expressions.md#print), it does
+resulting string to [`STDOUT`](06-constants.md#core-predefined-constants). Unlike [`print`](10-expressions.md#print-expression), it does
 not produce a result.
 
 See also: [double quoted strings](09-lexical-structure.md#double-quoted-string-literals) and
